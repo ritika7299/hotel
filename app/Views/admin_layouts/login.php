@@ -109,6 +109,13 @@
                                             class=" btn btn-lg btn-block">Login</button>
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <div class="input-group mt-2">
+                                        <a href="<?php echo site_url('admin/register') ?>"
+                                            class=" btn btn-lg btn-block btn-secondary">
+                                            Register</a>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         <!-- Admin login form  -->

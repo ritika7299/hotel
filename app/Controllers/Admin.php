@@ -11,6 +11,11 @@ class Admin extends BaseController
 
         return view('admin_layouts/login');
     }
+    // admin registration 
+    public function register()
+    {
+        return view('admin_layouts/register');
+    }
     // admin login function 
     public function loginAuth()
     {
@@ -78,4 +83,14 @@ class Admin extends BaseController
     {
         return view('admin_layouts/settings');
     }
+    // test function 
+    public function test()
+    {
+        return view('layouts/default');
+    }
+    // running function 
+    // public function test()
+    // {
+    //     return view('admin_layouts/main');
+    // }
 }

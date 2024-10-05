@@ -308,40 +308,38 @@
         <!-- inner content -->
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
-                <!-- Page Header -->
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-
-                            <nav aria-label="breadcrumb" role="navigation">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item" aria-current="page">
-                                        Reservations
-                                    </li>
-                                </ol>
-                            </nav>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Dashboard</h4>
                         </div>
-                        <div class="col-md-6 col-sm-12 text-right">
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    Reservation
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <!-- Simple Datatable start -->
+                <div class="pd-20 card-box mb-30">
+                    <div class="clearfix mb-20">
+                        <div class="col-md-6 col-sm-12 text-right pull-right">
                             <div class="btn btn-info" data-toggle="modal" data-target="#reservation-modal">
                                 Reservation <i class="micon fa fa-plus"></i>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-
-                <!-- Simple Datatable start -->
-                <div class="pd-20 card-box mb-30">
-                    <div class="clearfix mb-20">
-                        <div class="pull-left">
-                            <h4 class="text-info h4">List</h4>
-                        </div>
                     </div>
                     <table class="table table-bordered">
                         <thead>
+                            <tr>
+                                <th colspan="11" class="text-info">List</th>
+                            </tr>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
@@ -368,7 +366,7 @@
                                 <td>4</td>
                                 <td>1500/-</td>
                                 <td><span class="badge badge-danger">
-                                        Booked <i class="icon-copy fa fa-calendar-check-o"></i></span></td>
+                                        Check-In <i class="icon-copy fa fa-calendar-check-o"></i></span></td>
                                 <td>
                                     <div class="table-actions">
                                         <a href="" data-color="#265ed7" data-toggle="modal"
@@ -378,10 +376,7 @@
                                         <a href="#" data-color="#e95959" style="color: rgb(233, 89, 89)">
                                             <i class="icon-copy dw dw-delete-3"></i>
                                         </a>
-                                        <a href="#" data-toggle="modal" data-target="#view-room-detailsmodal"
-                                            data-color="#009900" style="color: rgb(0, 153, 0);">
-                                            <i class="icon-copy dw dw-eye"></i>
-                                        </a>
+
                                     </div>
                                 </td>
                             </tr>
@@ -392,7 +387,7 @@
                                 <td>8851734531</td>
                                 <td><span class="badge badge-secondary">Passport Card</span></td>
                                 <td><span class="badge rounded-pill badge-info">Passport1234</span></td>
-                                <td>Doubule</td>
+                                <td>Double</td>
                                 <td>1</td>
                                 <td>1000/-</td>
                                 <td><span class="badge badge-success">
@@ -406,10 +401,7 @@
                                         <a href="#" data-color="#e95959" style="color: rgb(233, 89, 89)">
                                             <i class="icon-copy dw dw-delete-3"></i>
                                         </a>
-                                        <a href="#" data-toggle="modal" data-target="#view-room-detailsmodal"
-                                            data-color="#009900" style="color: rgb(0, 153, 0);">
-                                            <i class="icon-copy dw dw-eye"></i>
-                                        </a>
+
                                     </div>
                                 </td>
                             </tr>

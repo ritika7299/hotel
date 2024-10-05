@@ -343,36 +343,37 @@
                     </div>
                 <?php endif; ?>
                 <!-- success message -->
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <nav aria-label="breadcrumb" role="navigation">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item " aria-current="page">
-                                        Rooms
-                                    </li>
-                                </ol>
-                            </nav>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Dashboard</h4>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="btn btn-primary pull-right" data-toggle="modal" data-target="#addroom-modal">
-                                Add Room <i class="micon fa fa-plus"></i>
-                            </div>
-                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    Room
+                                </li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
                 <!-- Simple Datatable start -->
                 <div class="pd-20 card-box mb-30">
                     <div class="clearfix mb-20">
-                        <div class="pull-left">
-                            <h4 class="text-blue h4">List</h4>
+                        <div class="col-md-12 col-sm-12">
+                            <div class="btn btn-primary pull-right" data-toggle="modal" data-target="#addroom-modal">
+                                Add Room <i class="micon fa fa-plus"></i>
+                            </div>
                         </div>
                     </div>
                     <table class="table table-bordered">
                         <thead>
+                            <tr>
+                                <th colspan="7" class="text-primary">Room List</th>
+                            </tr>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Floor</th>
@@ -387,10 +388,10 @@
                             <tr>
                                 <td>1</td>
                                 <td>First</td>
-                                <td>102</td>
+                                <td>202</td>
                                 <td>Single</td>
                                 <td>1500/-</td>
-                                <td><span class="badge badge-primary">
+                                <td><span class="badge badge-success">
                                         Available</span></td>
                                 <td>
                                     <div class="table-actions">
@@ -401,14 +402,29 @@
                                         <a href="#" data-color="#e95959" style="color: rgb(233, 89, 89)">
                                             <i class="icon-copy dw dw-delete-3"></i>
                                         </a>
-                                        <a href="#" data-toggle="modal" data-target="#view-room-detailsmodal"
-                                            data-color="#FABC3F" style="color: rgb(156, 129, 9)">
-                                            <i class="icon-copy dw dw-eye"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Ground</td>
+                                <td>102</td>
+                                <td>Deluxe</td>
+                                <td>1500/-</td>
+                                <td><span class="badge badge-danger">
+                                        Not-Available</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <a href="" data-color="#265ed7" data-toggle="modal"
+                                            data-target="#update-room-modal" style="color: rgb(38, 94, 215)">
+                                            <i class="icon-copy dw dw-edit2"></i>
+                                        </a>
+                                        <a href="#" data-color="#e95959" style="color: rgb(233, 89, 89)">
+                                            <i class="icon-copy dw dw-delete-3"></i>
                                         </a>
                                     </div>
                                 </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>

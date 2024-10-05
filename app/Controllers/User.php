@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Models\UserModel;
 
 
-class Staff extends BaseController
+class User extends BaseController
 {
     public $helpers = ['form'];
     public function index()

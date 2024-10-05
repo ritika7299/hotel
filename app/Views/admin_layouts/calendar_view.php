@@ -77,9 +77,6 @@
         font-weight: normal;
     }
 
-
-
-
     .btn:hover {
         background-color: #0056b3;
         /* Change color on hover */
@@ -412,172 +409,161 @@
         <!-- inner content -->
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
-                <!-- page header -->
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="title">
-                                <h4>Staff</h4>
-                            </div>
-                            <nav aria-label="breadcrumb" role="navigation">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item" aria-current="page">
-                                        Staff
-                                    </li>
-                                </ol>
-                            </nav>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Dashboard</h4>
                         </div>
-                        <div class="col-md-6 col-sm-12 text-right">
-                            <div class="btn btn-primary" data-toggle="modal" data-target="#add-staff-modal">
-                                Add Details <i class="micon fa fa-plus"></i>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    Calendar
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <?php
+                // Array of month names
+                $months = [
+                    1 => 'January',
+                    2 => 'February',
+                    3 => 'March',
+                    4 => 'April',
+                    5 => 'May',
+                    6 => 'June',
+                    7 => 'July',
+                    8 => 'August',
+                    9 => 'September',
+                    10 => 'October',
+                    11 => 'November',
+                    12 => 'December'
+                ];
+
+                // Array of days in a week
+                $weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+                // Get current month and year
+                $currentMonth = date('n');
+                $currentYear = date('Y');
+                ?>
+                <div class="pd-20 card-box mb-30">
+                    <div class="calendar-wrap">
+                        <div id="calendar" class="fc fc-bootstrap4 fc-ltr">
+                            <div class="fc-toolbar fc-header-toolbar">
+                                <div class="fc-left">
+                                    <h2 id="calendar-title" class="calendar-title">
+                                        <?= $months[$currentMonth] . " " . $currentYear; ?>
+                                    </h2>
+                                </div>
+                                <div class="fc-right">
+                                    <button id="prevMonth" class="btn prev-btn">Previous</button>
+                                    <button id="nextMonth" class="btn next-btn">Next</button>
+                                </div>
+                            </div>
+                            <div class="fc-view-container calendar-container">
+                                <div id="calendar-content" class="calendar-content">
+                                    <!-- Calendar will be loaded here dynamically using JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- New section for displaying festival names -->
+                            <div id="festival-list" class="festival-list-box">
+                                <!-- Festival names will be loaded here -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /page header -->
-            </div>
-
-            <?php
-            // Array of month names
-            $months = [
-                1 => 'January',
-                2 => 'February',
-                3 => 'March',
-                4 => 'April',
-                5 => 'May',
-                6 => 'June',
-                7 => 'July',
-                8 => 'August',
-                9 => 'September',
-                10 => 'October',
-                11 => 'November',
-                12 => 'December'
-            ];
-
-            // Array of days in a week
-            $weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-            // Get current month and year
-            $currentMonth = date('n');
-            $currentYear = date('Y');
-            ?>
-            <div class="pd-20 card-box mb-30">
-                <div class="calendar-wrap">
-                    <div id="calendar" class="fc fc-bootstrap4 fc-ltr">
-                        <div class="fc-toolbar fc-header-toolbar">
-                            <div class="fc-left">
-                                <h2 id="calendar-title" class="calendar-title">
-                                    <?= $months[$currentMonth] . " " . $currentYear; ?>
-                                </h2>
-                            </div>
-                            <div class="fc-right">
-                                <button id="prevMonth" class="btn prev-btn">Previous</button>
-                                <button id="nextMonth" class="btn next-btn">Next</button>
-                            </div>
-                        </div>
-                        <div class="fc-view-container calendar-container">
-                            <div id="calendar-content" class="calendar-content">
-                                <!-- Calendar will be loaded here dynamically using JavaScript -->
-                            </div>
-                        </div>
-
-                        <!-- New section for displaying festival names -->
-                        <div id="festival-list" class="festival-list-box">
-                            <!-- Festival names will be loaded here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- calendar modal -->
-            <!-- view-event -->
-            <div id="modal-view-event" class="modal modal-top fade calendar-modal">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <h4 class="h4">
-                                <span class="event-icon weight-400 mr-3"></span><span class="event-title"></span>
-                            </h4>
-                            <div class="event-body"></div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /view-event -->
-            <!-- view-event-add -->
-            <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <form id="add-event">
+                <!-- calendar modal -->
+                <!-- view-event -->
+                <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
                             <div class="modal-body">
-                                <h4 class="text-blue h4 mb-10">Add Event Detail</h4>
-                                <div class="form-group">
-                                    <label>Event name</label>
-                                    <input type="text" class="form-control" name="ename">
-                                </div>
-                                <div class="form-group">
-                                    <label>Event Date</label>
-                                    <input type="text" class="datetimepicker form-control" name="edate">
-                                </div>
-                                <div class="form-group">
-                                    <label>Event Description</label>
-                                    <textarea class="form-control" name="edesc"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>Event Color</label>
-                                    <select class="form-control" name="ecolor">
-                                        <option value="fc-bg-default">fc-bg-default</option>
-                                        <option value="fc-bg-blue">fc-bg-blue</option>
-                                        <option value="fc-bg-lightgreen">
-                                            fc-bg-lightgreen
-                                        </option>
-                                        <option value="fc-bg-pinkred">fc-bg-pinkred</option>
-                                        <option value="fc-bg-deepskyblue">
-                                            fc-bg-deepskyblue
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Event Icon</label>
-                                    <select class="form-control" name="eicon">
-                                        <option value="circle">circle</option>
-                                        <option value="cog">cog</option>
-                                        <option value="group">group</option>
-                                        <option value="suitcase">suitcase</option>
-                                        <option value="calendar">calendar</option>
-                                    </select>
-                                </div>
+                                <h4 class="h4">
+                                    <span class="event-icon weight-400 mr-3"></span><span class="event-title"></span>
+                                </h4>
+                                <div class="event-body"></div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">
-                                    Save
-                                </button>
                                 <button type="button" class="btn btn-primary" data-dismiss="modal">
                                     Close
                                 </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+                <!-- /view-event -->
+                <!-- view-event-add -->
+                <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form id="add-event">
+                                <div class="modal-body">
+                                    <h4 class="text-blue h4 mb-10">Add Event Detail</h4>
+                                    <div class="form-group">
+                                        <label>Event name</label>
+                                        <input type="text" class="form-control" name="ename">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Date</label>
+                                        <input type="text" class="datetimepicker form-control" name="edate">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Description</label>
+                                        <textarea class="form-control" name="edesc"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Color</label>
+                                        <select class="form-control" name="ecolor">
+                                            <option value="fc-bg-default">fc-bg-default</option>
+                                            <option value="fc-bg-blue">fc-bg-blue</option>
+                                            <option value="fc-bg-lightgreen">
+                                                fc-bg-lightgreen
+                                            </option>
+                                            <option value="fc-bg-pinkred">fc-bg-pinkred</option>
+                                            <option value="fc-bg-deepskyblue">
+                                                fc-bg-deepskyblue
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Event Icon</label>
+                                        <select class="form-control" name="eicon">
+                                            <option value="circle">circle</option>
+                                            <option value="cog">cog</option>
+                                            <option value="group">group</option>
+                                            <option value="suitcase">suitcase</option>
+                                            <option value="calendar">calendar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /view-event-add -->
+                <!-- /calendar modal -->
             </div>
-            <!-- /view-event-add -->
-            <!-- /calendar modal -->
+            <!-- footer wrap -->
+            <div class="footer-wrap pd-20 mb-20 card-box">
+                This theme design by
+                <a href="https://github.com/dropways" target="_blank">ABC</a>
+            </div>
+            <!-- footer wrap -->
         </div>
-        <!-- footer wrap -->
-        <div class="footer-wrap pd-20 mb-20 card-box">
-            This theme design by
-            <a href="https://github.com/dropways" target="_blank">ABC</a>
-        </div>
-        <!-- footer wrap -->
-    </div>
-    <!-- /inner content -->
+        <!-- /inner content -->
     </div>
     <!-- /main container -->
 </body>

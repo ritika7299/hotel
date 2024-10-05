@@ -11,6 +11,8 @@ $routes->get('/', 'Home::index');
 /*----admin controller section ------ */
 // view routes
 $routes->get('admin', 'Admin::index');
+// view register page 
+$routes->get('admin/register', 'Admin::register');
 // login routes
 $routes->post('admin/loginAuth', 'Admin::loginAuth');
 // dashboard routes
@@ -31,6 +33,9 @@ $routes->get('calendar', 'Admin::calendar');
 $routes->get('reports', 'Admin::report');
 // settings routes
 $routes->get('settings', 'Admin::settings');
+// test routes
+$routes->get('test', 'Admin::test');
+
 
 
 
@@ -42,8 +47,8 @@ $routes->get('settings', 'Admin::settings');
 // $routes->get('login/logout', 'Login::logout');
 
 /*----user controller section ------ */
-// $routes->get('user', 'User::index');
-// $routes->get('user/register', 'User::register');
+$routes->get('user', 'User::index');
+$routes->get('register', 'User::register');
 // $routes->post('user/register', 'User::register');
 // $routes->get('user/dashboard', 'User::dashboard');
 // $routes->get('user/reservation', 'User::reservation');

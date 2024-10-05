@@ -321,30 +321,25 @@
                     </div>
                 <?php endif; ?>
                 <!-- success message -->
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="title">
-                                <h4>Staff</h4>
-                            </div>
-                            <nav aria-label="breadcrumb" role="navigation">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item" aria-current="page">
-                                        Staff
-                                    </li>
-                                </ol>
-                            </nav>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Dashboard</h4>
                         </div>
-                        <div class="col-md-6 col-sm-12 text-right">
-                            <div class="btn btn-primary" data-toggle="modal" data-target="#add-staff-modal">
-                                Add Details <i class="micon fa fa-plus"></i>
-                            </div>
-                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    Staff
+                                </li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
+
 
                 <!-- Simple Datatable start -->
                 <div class="pd-20 card-box mb-30">
@@ -354,13 +349,18 @@
                         </div>
                     <?php endif; ?>
                     <div class="clearfix mb-20">
-                        <div class="pull-left">
-                            <h4 class="text-blue h4">List</h4>
+                        <div class="col-md-6 col-sm-12 text-right pull-right">
+                            <div class="btn btn-primary" data-toggle="modal" data-target="#add-staff-modal">
+                                Add Details <i class="micon fa fa-plus"></i>
+                            </div>
                         </div>
 
                     </div>
                     <table class="table table-bordered">
                         <thead>
+                            <tr>
+                                <th colspan="12" class="text-primary">Staff List</th>
+                            </tr>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
@@ -376,9 +376,22 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <!-- <tbody>
-                            
-                        </tbody> -->
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <!-- Simple Datatable End -->
@@ -388,7 +401,7 @@
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header bg-primary">
-                                <h4 class="modal-title text-white" id="myLargeModalLabel">
+                                <h4 class="modal-title text-white" id="myLargeModalLabel">Add Staff
                                 </h4>
                                 <?= session()->getFlashdata('error') ?>
 

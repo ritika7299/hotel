@@ -252,7 +252,6 @@
                         <a href="<?php echo base_url('reservations/'); ?>" class="dropdown-toggle no-arrow">
                             <span class="micon fa fa-calendar-check-o"></span><span class="mtext">Reservations</span>
                         </a>
-
                     </li>
                     <!-- /Reservation -->
                     <!-- Room management -->
@@ -260,7 +259,6 @@
                         <a href="<?php echo base_url('room/'); ?>" class="dropdown-toggle no-arrow">
                             <span class="micon fa fa-bed"></span><span class="mtext">Rooms</span>
                         </a>
-
                     </li>
                     <!-- /Room management -->
                     <!-- Guest management -->
@@ -306,107 +304,232 @@
     </div>
     <!-- /left sidebar -->
     <!-- main container -->
-    <div class="main-container">
+    <div class="main-container ">
         <!-- inner content -->
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
-                <!-- page header -->
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <nav aria-label="breadcrumb" role="navigation">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"> <a
-                                            href="<?php echo base_url('admin/dashboard'); ?>">Home</a></li>
-                                    <li class="breadcrumb-item" aria-current="page">
-                                        Reports
-                                    </li>
-                                </ol>
-                            </nav>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Dashboard</h4>
                         </div>
-
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    Report
+                                </li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
-                <!-- page header -->
-                <!-- Simple Datatable start -->
-                <div class="card-box mb-30">
-                    <div class="pd-20">
-                        <h4 class="text-blue h4">Reports</h4>
-                    </div>
-                    <!-- paste report content here  -->
-                    <!-- /paste report content here  -->
+                <div class="pd-20 card-box mb-30">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="11" class="text-danger">List</th>
+                            </tr>
+                            <tr>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
                 </div>
                 <!-- Simple Datatable End -->
-                <!-- add modal -->
-                <div class="modal fade" id="addroom-modal" tabindex="-1" role="dialog"
+                <!-- Models -->
+                <!-- add guest modal -->
+                <div class="modal fade" id="add-guest-modal" tabindex="-1" role="dialog"
                     aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header bg-success">
+                            <div class="modal-header bg-primary">
                                 <h4 class="modal-title text-white" id="myLargeModalLabel">
-                                    Add
+                                    Add Guest Details
                                 </h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                     ×
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form class="tab-wizard wizard-circle wizard clearfix" role="application"
-                                    action="<?php echo base_url('room/add'); ?>" method="POST" id="steps-uid-0">
+                                <!-- add form open function here -->
+                                <div class="content clearfix">
+                                    <div class="col-md-12">
+                                        <div class=" form-group">
+                                            <select class="form-control" id="floor_type" required="">
+                                                <option data-select2-id="11" value="">Select
+                                                    floor
+                                                </option>
+                                                <option data-select2-id="12" value="ground">Ground</option>
+                                                <option data-select2-id="13" value="first">First</option>
+                                                <option data-select2-id="13" value="second">Second</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select class="form-control" id="room_no" required="">
+                                                <option data-select2-id="14" value="">Select
+                                                    Room no.
+                                                </option>
+                                                <!-- ground -->
+                                                <option data-select2-id="15" value="">101</option>
+                                                <option data-select2-id="16" value="">102</option>
+                                                <option data-select2-id="17" value="">103</option>
+                                                <option data-select2-id="18" value="">104</option>
+                                                <!-- first -->
+                                                <option data-select2-id="19" value="">201</option>
+                                                <option data-select2-id="20" value="">202</option>
+                                                <option data-select2-id="21" value="">203</option>
+                                                <option data-select2-id="22" value="">204</option>
+                                                <!-- second -->
+                                                <option data-select2-id="23" value="">301</option>
+                                                <option data-select2-id="24" value="">302</option>
+                                                <option data-select2-id="25" value="">303</option>
+                                                <option data-select2-id="26" value="">304</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class=" form-group">
+                                            <select class="form-control" id="room_type" required="">
+                                                <option data-select2-id="27" value="">Select
+                                                    Room type
+                                                </option>
+                                                <option data-select2-id="28" value="ground">Single</option>
+                                                <option data-select2-id="29" value="first">Double</option>
+                                                <option data-select2-id="30" value="second">Deluxe</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class=" form-group">
+                                            <select class="form-control" id="status" value="" required="">
+                                                <option data-select2-id="22" value="">Select status
+                                                </option>
+                                                <option data-select2-id="23" value="avl">Available</option>
+                                                <option data-select2-id="24" value="not-avl">Not Available
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="price" placeholder="Add Price"
+                                                value="" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" form="addRoomDetailsForm"
+                                    id="#addroomdetails-modal">
+                                    Save
+                                </button>
+                            </div>
+                            <!-- add close form -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /add room details modal -->
+                <!-- Update guest modal -->
+                <div class="modal fade" id="update-room-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h4 class="modal-title text-white" id="myLargeModalLabel">
+                                    Update guest Details
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="tab-wizard wizard-circle wizard clearfix" role="application" method="POST"
+                                    id=" steps-uid-0">
                                     <div class="content clearfix">
-                                        <!-- row 1 -->
                                         <div class="col-md-12">
-                                            <div class="form-group">
-                                                <select class="custom-select2 form-control select2-hidden-accessible"
-                                                    name="room_floor" style="width: 100%; height: 38px"
-                                                    data-select2-id="1" tabindex="-1" aria-hidden="true" required>
-                                                    <option data-select2-id="01" value="">Select Floor</option>
-                                                    <option data-select2-id="02" value="Ground">Ground</option>
-                                                    <option data-select2-id="03" value="First">First </option>
-                                                    <option data-select2-id="04" value="Second">Second</option>
+                                            <div class=" form-group">
+                                                <select class="form-control" id="floor_type" required="">
+                                                    <option data-select2-id="11" value="">Select
+                                                        floor
+                                                    </option>
+                                                    <option data-select2-id="12" value="ground">Ground
+                                                    </option>
+                                                    <option data-select2-id="13" value="first">First
+                                                    </option>
+                                                    <option data-select2-id="13" value="second">Second
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <select class="custom-select2 form-control select2-hidden-accessible"
-                                                    name="room_no" style="width: 100%; height: 38px" data-select2-id="2"
-                                                    tabindex="-1" aria-hidden="true" required>
-                                                    <option data-select2-id="05" value="">Select Room no.</option>
-                                                    <option data-select2-id="06" value="G101">G101</option>
-                                                    <option data-select2-id="07" value="G102">G102</option>
-                                                    <option data-select2-id="08" value="G103">G103</option>
-                                                    <option data-select2-id="09" value="G104">G104</option>
-                                                    <option data-select2-id="10" value="FA101">FA101</option>
-                                                    <option data-select2-id="11" value="FA102">FA102</option>
-                                                    <option data-select2-id="12" value="FA103">FA103</option>
-                                                    <option data-select2-id="13" value="FA104">FA104</option>
-                                                    <option data-select2-id="14" value="FB101">FB101</option>
-                                                    <option data-select2-id="15" value="FB102">FB102</option>
-                                                    <option data-select2-id="16" value="FB103">FB103</option>
-                                                    <option data-select2-id="17" value="FB104">FB104</option>
-                                                    <option data-select2-id="18" value="FC101">FC101</option>
-                                                    <option data-select2-id="19" value="FC102">FC102</option>
-                                                    <option data-select2-id="20" value="FC103">FC103</option>
-                                                    <option data-select2-id="21" value="FC104">FC104</option>
+                                                <select class="form-control" id="room_no" required="">
+                                                    <option data-select2-id="14" value="">
+                                                        Select
+                                                        Room no.
+                                                    </option>
+                                                    <!-- ground -->
+                                                    <option data-select2-id="15" value="">101</option>
+                                                    <option data-select2-id="16" value="">102</option>
+                                                    <option data-select2-id="17" value="">103</option>
+                                                    <option data-select2-id="18" value="">104</option>
+                                                    <!-- first -->
+                                                    <option data-select2-id="19" value="">201</option>
+                                                    <option data-select2-id="20" value="">202</option>
+                                                    <option data-select2-id="21" value="">203</option>
+                                                    <option data-select2-id="22" value="">204</option>
+                                                    <!-- second -->
+                                                    <option data-select2-id="23" value="">301</option>
+                                                    <option data-select2-id="24" value="">302</option>
+                                                    <option data-select2-id="25" value="">303</option>
+                                                    <option data-select2-id="26" value="">304</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <!-- row 1 -->
-                                        <!-- row 2 -->
                                         <div class="col-md-12">
-                                            <div class="form-gropu">
-                                                <select
-                                                    class="custom-select2 form-control select2-hidden-accessible bg-info"
-                                                    name="status" style="width: 100%; height: 38px" data-select2-id="3"
-                                                    tabindex="-1" aria-hidden="true" required>
-                                                    <option data-select2-id="22">Select status</option>
-                                                    <option data-select2-id="23">Book</option>
-                                                    <option data-select2-id="24">Booked</option>
+                                            <div class=" form-group">
+                                                <select class="form-control" id="room_type" required="">
+                                                    <option data-select2-id="27" value="">Select
+                                                        Room type
+                                                    </option>
+                                                    <option data-select2-id="28" value="ground">Single
+                                                    </option>
+                                                    <option data-select2-id="29" value="first">Double
+                                                    </option>
+                                                    <option data-select2-id="30" value="second">Deluxe
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <!-- row 2 -->
+                                        <div class="col-md-12">
+                                            <div class=" form-group">
+                                                <select class="form-control" id="status" value="" required="">
+                                                    <option data-select2-id="22" value="">Select status
+                                                    </option>
+                                                    <option data-select2-id="23" value="avl">Available
+                                                    </option>
+                                                    <option data-select2-id="24" value="not-avl">Not
+                                                        Available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="price"
+                                                    placeholder="Add Price" value="" required="">
+                                            </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -414,24 +537,80 @@
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                     Close
                                 </button>
-                                <a href="<?php echo base_url('room/create'); ?>"><button type="submit"
-                                        class="btn btn-success" href="">
-                                        Save
-                                    </button></a>
-
+                                <a href="#" class="btn btn-primary" type="submit" data-toggle="modal"
+                                    data-target="#addroomdetails-modal" form="updateRoomDetailsForm">
+                                    Save
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- /Update room modal -->
+                <!-- details-modal -->
+                <div class="modal fade" id="roomdetails-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myLargeModalLabel">
+                                    Large modal
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Details</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /details-modal -->
+                <!-- models -->
             </div>
-            <!-- /modal -->
+            <!--/customer and bookings details -->
+            <!-- table of rooms -->
         </div>
-    </div>
-
-    <!-- /inner content -->
+        <!-- /inner content -->
+        <!-- footer -->
+        <div class="pd-ltr-20 xs-pd-20-10 bottom">
+            <!-- footer wrap -->
+            <div class="footer-wrap pd-20 mb-20 mt-3 card-box ">
+                This theme design by
+                <a href="https://github.com/dropways" target="_blank">ABC</a>
+            </div>
+            <!-- footer wrap -->
+        </div>
+        <!-- /footer -->
     </div>
     <!-- /main container -->
 </body>
-
-
 <?php include('template/dashboard-footer.php'); ?>

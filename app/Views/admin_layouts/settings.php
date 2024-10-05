@@ -1,6 +1,5 @@
 <?php include('template/dashboard-header.php'); ?>
 
-
 <body>
     <!-- loader -->
     <!-- <div class="pre-loader">
@@ -18,7 +17,6 @@
     <!-- /loader -->
     <!-- header -->
     <div class="header">
-        <!-- header-left -->
         <div class="header-left">
             <div class="menu-icon bi bi-list"></div>
             <div class="search-toggle-icon bi bi-search" data-toggle="header_search"></div>
@@ -33,25 +31,25 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label" id="fromInput">From</label>
+                                    <label class="col-sm-12 col-md-2 col-form-label">From</label>
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control form-control-sm form-control-line" type="text" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-12 col-md-2 col-form-label" id="toInput">To</label>
+                                    <label class="col-sm-12 col-md-2 col-form-label">To</label>
                                     <div class="col-sm-12 col-md-10">
                                         <input class="form-control form-control-sm form-control-line" type="text" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-md-2 col-form-label">Subject</label>
-                                    <div class="col-sm-12 col-md-10" id="fromInput">
+                                    <div class="col-sm-12 col-md-10">
                                         <input class="form-control form-control-sm form-control-line" type="text" />
                                     </div>
                                 </div>
                                 <div class="text-right">
-                                    <button class="btn btn-primary" onclick="performSearch()">Search</button>
+                                    <button class="btn btn-primary">Search</button>
                                 </div>
                             </div>
                         </div>
@@ -59,8 +57,6 @@
                 </form>
             </div>
         </div>
-        <!-- /header-left -->
-        <!-- header-right -->
         <div class="header-right">
             <div class="dashboard-setting user-notification">
                 <div class="dropdown">
@@ -129,12 +125,10 @@
                         src="<?php echo site_url(); ?>public/backend/vendors/images/github.svg" alt="" /></a>
             </div> -->
         </div>
-        <!-- header-right -->
     </div>
     <!-- /header -->
     <!-- right sidebar -->
     <div class="right-sidebar">
-        <!-- sidebar-title -->
         <div class="sidebar-title">
             <h3 class="weight-600 font-16 text-blue">
                 Layout Settings
@@ -144,7 +138,6 @@
                 <i class="icon-copy ion-close-round"></i>
             </div>
         </div>
-        <!-- /sidebar-title -->
         <!-- right sidebar content -->
         <div class="right-sidebar-body customscroll">
             <div class="right-sidebar-body-content">
@@ -311,14 +304,14 @@
     </div>
     <!-- /left sidebar -->
     <!-- main container -->
-    <div class="main-container">
+    <div class="main-container ">
         <!-- inner content -->
-        <div class="min-height-200px">
-            <div class="page-header">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <div class="title">
-                            <h4>Settings</h4>
+                            <h4>Dashboard</h4>
                         </div>
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
@@ -332,16 +325,291 @@
                         </nav>
                     </div>
                 </div>
+                <div class="pd-20 card-box mb-30">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="11" class="text-danger">List</th>
+                            </tr>
+                            <tr>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Simple Datatable End -->
+                <!-- Models -->
+                <!-- add guest modal -->
+                <div class="modal fade" id="add-guest-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h4 class="modal-title text-white" id="myLargeModalLabel">
+                                    Add Guest Details
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- add form open function here -->
+                                <div class="content clearfix">
+                                    <div class="col-md-12">
+                                        <div class=" form-group">
+                                            <select class="form-control" id="floor_type" required="">
+                                                <option data-select2-id="11" value="">Select
+                                                    floor
+                                                </option>
+                                                <option data-select2-id="12" value="ground">Ground</option>
+                                                <option data-select2-id="13" value="first">First</option>
+                                                <option data-select2-id="13" value="second">Second</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select class="form-control" id="room_no" required="">
+                                                <option data-select2-id="14" value="">Select
+                                                    Room no.
+                                                </option>
+                                                <!-- ground -->
+                                                <option data-select2-id="15" value="">101</option>
+                                                <option data-select2-id="16" value="">102</option>
+                                                <option data-select2-id="17" value="">103</option>
+                                                <option data-select2-id="18" value="">104</option>
+                                                <!-- first -->
+                                                <option data-select2-id="19" value="">201</option>
+                                                <option data-select2-id="20" value="">202</option>
+                                                <option data-select2-id="21" value="">203</option>
+                                                <option data-select2-id="22" value="">204</option>
+                                                <!-- second -->
+                                                <option data-select2-id="23" value="">301</option>
+                                                <option data-select2-id="24" value="">302</option>
+                                                <option data-select2-id="25" value="">303</option>
+                                                <option data-select2-id="26" value="">304</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class=" form-group">
+                                            <select class="form-control" id="room_type" required="">
+                                                <option data-select2-id="27" value="">Select
+                                                    Room type
+                                                </option>
+                                                <option data-select2-id="28" value="ground">Single</option>
+                                                <option data-select2-id="29" value="first">Double</option>
+                                                <option data-select2-id="30" value="second">Deluxe</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class=" form-group">
+                                            <select class="form-control" id="status" value="" required="">
+                                                <option data-select2-id="22" value="">Select status
+                                                </option>
+                                                <option data-select2-id="23" value="avl">Available</option>
+                                                <option data-select2-id="24" value="not-avl">Not Available
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="price" placeholder="Add Price"
+                                                value="" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" form="addRoomDetailsForm"
+                                    id="#addroomdetails-modal">
+                                    Save
+                                </button>
+                            </div>
+                            <!-- add close form -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /add room details modal -->
+                <!-- Update guest modal -->
+                <div class="modal fade" id="update-room-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h4 class="modal-title text-white" id="myLargeModalLabel">
+                                    Update guest Details
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="tab-wizard wizard-circle wizard clearfix" role="application" method="POST"
+                                    id=" steps-uid-0">
+                                    <div class="content clearfix">
+                                        <div class="col-md-12">
+                                            <div class=" form-group">
+                                                <select class="form-control" id="floor_type" required="">
+                                                    <option data-select2-id="11" value="">Select
+                                                        floor
+                                                    </option>
+                                                    <option data-select2-id="12" value="ground">Ground
+                                                    </option>
+                                                    <option data-select2-id="13" value="first">First
+                                                    </option>
+                                                    <option data-select2-id="13" value="second">Second
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <select class="form-control" id="room_no" required="">
+                                                    <option data-select2-id="14" value="">
+                                                        Select
+                                                        Room no.
+                                                    </option>
+                                                    <!-- ground -->
+                                                    <option data-select2-id="15" value="">101</option>
+                                                    <option data-select2-id="16" value="">102</option>
+                                                    <option data-select2-id="17" value="">103</option>
+                                                    <option data-select2-id="18" value="">104</option>
+                                                    <!-- first -->
+                                                    <option data-select2-id="19" value="">201</option>
+                                                    <option data-select2-id="20" value="">202</option>
+                                                    <option data-select2-id="21" value="">203</option>
+                                                    <option data-select2-id="22" value="">204</option>
+                                                    <!-- second -->
+                                                    <option data-select2-id="23" value="">301</option>
+                                                    <option data-select2-id="24" value="">302</option>
+                                                    <option data-select2-id="25" value="">303</option>
+                                                    <option data-select2-id="26" value="">304</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class=" form-group">
+                                                <select class="form-control" id="room_type" required="">
+                                                    <option data-select2-id="27" value="">Select
+                                                        Room type
+                                                    </option>
+                                                    <option data-select2-id="28" value="ground">Single
+                                                    </option>
+                                                    <option data-select2-id="29" value="first">Double
+                                                    </option>
+                                                    <option data-select2-id="30" value="second">Deluxe
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class=" form-group">
+                                                <select class="form-control" id="status" value="" required="">
+                                                    <option data-select2-id="22" value="">Select status
+                                                    </option>
+                                                    <option data-select2-id="23" value="avl">Available
+                                                    </option>
+                                                    <option data-select2-id="24" value="not-avl">Not
+                                                        Available</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input class="form-control" type="text" id="price"
+                                                    placeholder="Add Price" value="" required="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                                <a href="#" class="btn btn-primary" type="submit" data-toggle="modal"
+                                    data-target="#addroomdetails-modal" form="updateRoomDetailsForm">
+                                    Save
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Update room modal -->
+                <!-- details-modal -->
+                <div class="modal fade" id="roomdetails-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myLargeModalLabel">
+                                    Large modal
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    ×
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Details</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /details-modal -->
+                <!-- models -->
             </div>
+            <!--/customer and bookings details -->
+            <!-- table of rooms -->
         </div>
-        <!-- footer wrap -->
-        <div class="footer-wrap pd-20 mb-20 card-box">
-            This theme design by
-            <a href="https://github.com/dropways" target="_blank">ABC</a>
+        <!-- /inner content -->
+        <!-- footer -->
+        <div class="pd-ltr-20 xs-pd-20-10 bottom">
+            <!-- footer wrap -->
+            <div class="footer-wrap pd-20 mb-20 mt-3 card-box ">
+                This theme design by
+                <a href="https://github.com/dropways" target="_blank">ABC</a>
+            </div>
+            <!-- footer wrap -->
         </div>
-        <!-- footer wrap -->
-    </div>
-    <!-- /inner content -->
+        <!-- /footer -->
     </div>
     <!-- /main container -->
 </body>

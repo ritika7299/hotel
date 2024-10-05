@@ -308,27 +308,29 @@
         <!-- inner content -->
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
-                <!-- page header -->
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <nav aria-label="breadcrumb" role="navigation">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item " aria-current="page">
-                                        List
-                                    </li>
-                                </ol>
-                            </nav>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Dashboard</h4>
                         </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="<?php echo base_url('admin/dashboard'); ?>">Home</a>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    Guest
+                                </li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
-                <!-- /page header -->
                 <div class="pd-20 card-box mb-30">
                     <table class="table table-bordered">
                         <thead>
+                            <tr>
+                                <th colspan="11" class="text-danger">Guest List</th>
+                            </tr>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
@@ -364,10 +366,6 @@
                                         </a>
                                         <a href="#" data-color="#e95959" style="color: rgb(233, 89, 89)">
                                             <i class="icon-copy dw dw-delete-3"></i>
-                                        </a>
-                                        <a href="#" data-toggle="modal" data-target="#viewguest-detail-modal"
-                                            data-color="#FABC3F" style="color: rgb(250, 188, 63);">
-                                            <i class="icon-copy dw dw-eye"></i>
                                         </a>
                                     </div>
                                 </td>
