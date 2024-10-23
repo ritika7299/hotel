@@ -1,0 +1,7 @@
+.hover-text-danger {
+    transition: color 0.3s ease;
+}
+
+.hover-text-danger:hover {
+    color: red; /* Change this to your desired hover color */
+}
