@@ -5,12 +5,12 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
-// $routes->get('/login', 'Login::index');
+// $routes->get('/', 'Home::index'); // this is default controller
+
 
 /*----admin controller section ------ */
 // view routes
-$routes->get('admin', 'Admin::index');
+$routes->get('/', 'Admin::index'); //project's default controller
 // view register page 
 $routes->get('admin/register', 'Admin::register');
 // login routes
@@ -21,12 +21,8 @@ $routes->get('admin/dashboard', 'Admin::dashboard');
 $routes->get('admin/logout', 'Admin::logout');
 // Reservations routes
 $routes->get('reservations', 'Admin::reservations');
-// Room routes
-// $routes->get('room', 'Admin::room');
 // guest routes
 $routes->get('guest', 'Admin::guest');
-// staff routes
-// $routes->get('staff', 'Admin::staff_view');
 // Calender routes
 $routes->get('calendar', 'Admin::calendar');
 // Report routes
@@ -36,46 +32,40 @@ $routes->get('settings', 'Admin::settings');
 // test routes
 $routes->get('test', 'Admin::test');
 
-// Define the routes for registration
+// admin registration controller routes  
 $routes->group('auth', function ($routes) {
     $routes->get('Admin/register', 'Auth::register'); // Show registration form
     $routes->post('Admin/create', 'Auth::create'); // Process registration
 });
-
-// rooms routes
+// rooms controller routes
 $routes->get('/room', 'Room::index');
-// $routes->post('room/add_form_details', 'Room::add_form_details');
-$routes->post('room/insert_data', 'room::insert_data');
-$routes->delete('room/delete/(:num)', 'Room::delete/$1'); // To delete room
-// $routes->post('add-room', 'RoomController::addRoom');
-$routes->get('roomcontroller', 'RoomController::index');
+$routes->post('room/addRoom', 'room::addRoom');
+$routes->post('room/deleteRoom/(:num)', 'Room::deleteRoom/$1'); // To delete room
 
-$routes->get('/roomcontroller', 'RoomController::index');
-$routes->post('RoomController/saveRoomDetails', 'RoomController::saveRoomDetails');
-$routes->get('RoomController/viewRoomDetails', 'RoomController::viewRoomDetails');
-
-// staff controller functions routes  
+// staff controller routes  
 $routes->get('staff', 'Staff::index');
 $routes->post('staff/add_form_details', 'Staff::add_form_details');
-
-$routes->get('staff/edit/(:num)', 'Staff::edit_staff_details/$1'); // To edit staff
-$routes->post('staff/updateStaff/(:num)', 'Staff::updateStaff/$1'); // To update staff
-$routes->delete('staff/ delete_details', 'Staff:: delete_details'); // To delete staff
+$routes->get('staff/get_staff_details/(:num)', 'Staff::get_staff_details/$1'); //get staff details
+$routes->post('staff/update_staff/(:num)', 'Staff::update_staff/$1'); // Update staff
+$routes->delete('staff/delete_staff/(:num)', 'Staff::delete_staff/$1'); // Delete staff
 /*-------------------------------user[receptionist] controller section-------------------------------------------- */
-$routes->get('/auth', 'Auth::index');
-$routes->post('auth/store', 'Auth::store');
-$routes->get('auth/login', 'Auth::login');
-$routes->post('auth/authlogin', 'Auth::authlogin');
-$routes->get('auth/logout', 'Auth::logout');
-$routes->get('auth/dashboard', 'Auth::dashboard');
-$routes->get('auth/forgotPassword', 'Auth::forgotPassword');
-// link all dashboard pages of recepionist
+$routes->get('/auth', 'Auth::index');                           // user view
+$routes->post('auth/store', 'Auth::store');                     // store user details 
+$routes->get('auth/login', 'Auth::login');                      // user login view
+$routes->post('auth/authlogin', 'Auth::authlogin');             // user login
+$routes->get('auth/logout', 'Auth::logout');                    // user logout
+$routes->get('auth/dashboard', 'Auth::dashboard');              // user dashboard
+$routes->get('auth/forgotPassword', 'Auth::forgotPassword');    // user forgot password
+// link all dashboard pages of recepionist side using one controller
 $routes->get('availability', 'Auth::availability'); //availability
+$routes->post('room/getAvailableRooms', 'Room::getAvailableRooms');
 $routes->get('reservation', 'Auth::reservation');      //reservation
 $routes->get('booking', 'Auth::booking');      //booking
 $routes->get('invoice', 'Auth::invoice');      //invoice generate
 $routes->get('complaints', 'Auth::complaints');      //complaints
-
+// booking rooms for user controller routes
+$routes->post('booking/getAvailableRooms', 'Booking::getAvailableRooms');
+$routes->post('booking/createBooking', 'Booking::createBooking');
 
 
 

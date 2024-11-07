@@ -1,4 +1,6 @@
 </body>
+<!-- Include jQuery and Bootstrap JS (if not already included) by ritika-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- this js created by ritika -->
 <script src="<?php echo site_url(); ?>public/backend/vendors/scripts/demo.js"></script>
 <script src="<?php echo site_url(); ?>public/backend/vendors/scripts/demo_02.js"></script>

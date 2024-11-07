@@ -325,34 +325,35 @@
                                 </li>
                             </ol>
                         </nav>
-                    </div>
-                    <div class="col-md-6 col-sm-12">
-                        <span class="pull-right" id="responseMessage">
-                        </span>
+                        <!-- add success and message  -->
+                        <div class="col-md-6 col-sm-12">
+                            <span class="pull-right" id="responseMessage">
+                            </span>
+                            <span class="pull-right" id="deleteMessage">
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="pd-20 card-box mb-30">
                     <div class="clearfix mb-20">
                         <div class="col-md-12 col-sm-12 ">
-                            <div class="col-md-6" id="message-box" role="alert">
-                                <div id="message-text"></div>
-                            </div>
                             <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#AddRoom-modal">
                                 Add Room <i class="micon fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
                     <!-- datatable start -->
-                    <table class="table table-bordered">
+                    <table id="tableId" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th colspan="7" class="text-primary">Room List</th>
+                                <th colspan="8" class="text-primary">Room List</th>
                             </tr>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">S.No.</th>
                                 <th scope="col">Floor</th>
                                 <th scope="col">Room No.</th>
                                 <th scope="col">Room Type</th>
+                                <th scope="col">Members</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Action</th>
@@ -360,12 +361,14 @@
                         </thead>
                         <tbody id="roomTableBody">
                             <?php if (!empty($rooms)): ?>
+                                <?php $counter = 1; // Initialize a counter ?>
                                 <?php foreach ($rooms as $row): ?>
                                     <tr>
-                                        <td><?= esc($row['id']) ?></td>
+                                        <td><?= esc($counter++); // Display the counter and increment it ?></td>
                                         <td><?= esc($row['floor']) ?></td>
                                         <td><?= esc($row['room_no']) ?></td>
                                         <td><?= esc($row['room_type']) ?></td>
+                                        <td><?= esc($row['members']) ?></td>
                                         <td>
                                             <span
                                                 class="badge <?= esc($row['status']) == 'Available' ? 'badge-success' : 'badge-danger' ?>">
@@ -377,13 +380,13 @@
                                             <div class="table-actions">
                                                 <!-- Edit Room -->
                                                 <a href="<?= base_url("room/editRoom/{$row['id']}") ?>" data-toggle="modal"
-                                                    data-target="#update-room-modal" data-room-id="" class="edit-room"
+                                                    data-target="#updateRoom-modal" data-room-id="" class="edit-room"
                                                     style="color: rgb(38, 94, 215);">
                                                     <i class="icon-copy dw dw-edit2"></i>
                                                 </a>
                                                 <!-- Delete Room -->
-                                                <a href="<?= base_url("room/delete/{$row['id']}") ?>" data-room-id=""
-                                                    class="delete-room" style="color: rgb(233, 89, 89);">
+                                                <a href="<?= base_url('room/deleteRoom/' . $row['id']); ?>" class="delete-room"
+                                                    style="color: rgb(233, 89, 89);">
                                                     <i class="icon-copy dw dw-delete-3"></i>
                                                 </a>
                                             </div>
@@ -392,17 +395,33 @@
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="7">No rooms available</td>
+                                    <td colspan="8" class="text-danger text-center">No rooms available</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
                     <!--  /datatable end -->
+                    <!-- pagination area -->
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-end">
+                            <!-- Pagination links will be generated dynamically here -->
+                            <!-- <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li> -->
+                        </ul>
+                    </nav>
+                    <!-- pagination area -->
                 </div>
                 <!-- add room details modal -->
                 <div class="modal fade" id="AddRoom-modal" tabindex="-1" role="dialog"
                     aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header bg-primary">
                                 <h4 class="modal-title text-white" id="myLargeModalLabel">
@@ -444,6 +463,12 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
+                                                <input class="form-control" type="text" id="members"
+                                                    placeholder="Enter members" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
                                                 <select class="form-control" id="status" required>
                                                     <option value="">Select status</option>
                                                     <option value="Available">Available</option>
@@ -454,7 +479,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <input class="form-control" type="text" id="price"
-                                                    placeholder="Add Price" required>
+                                                    placeholder="Enter Price" required>
                                             </div>
                                         </div>
                                     </div>
@@ -470,7 +495,7 @@
                 <!-- Update room modal -->
                 <div class="modal fade" id="updateRoom-modal" tabindex="-1" role="dialog"
                     aria-labelledby="myLargeModalLabel" style="display: none;" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header bg-primary">
                                 <h4 class="modal-title text-white" id="myLargeModalLabel">
@@ -480,6 +505,7 @@
                                     ×
                                 </button>
                             </div>
+                            <!-- modal body -->
                             <div class="modal-body">
                                 <form class="tab-wizard wizard-circle wizard clearfix" role="application" method="POST"
                                     id=" steps-uid-0">
@@ -561,6 +587,7 @@
                                     </div>
                                 </form>
                             </div>
+                            <!-- modal footer -->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                     Close
@@ -574,31 +601,39 @@
                     </div>
                 </div>
                 <!-- /Update room modal -->
-                <!-- confirm delete details modal -->
-                <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
+                <!-- confirmation delete details modal -->
+                <div class="modal fade" id="confirmDelete-Modal" tabindex="-1" role="dialog"
+                    aria-labelledby="confirmDeleteModalLabel" style="display: none;">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="confirmDeleteModalLabel"> Are you sure you want to delete
-                                    this record?</h5>
+                            <div class="modal-body">
+                                Are you sure you want to delete?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                                <button type="submit" class="btn btn-danger" onclick="showDeleteModal('')"
-                                    id="confirmDelete">Yes</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <button type="button" class="btn btn-danger" id="confirm_Delete">Yes</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /confirm delete details modal -->
+                <!-- Modal for Success/Error messages -->
+                <div id="messageModal" class="modal fade" tabindex="-1" role="dialog"
+                    aria-labelledby="messageModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div id="modalMessage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--/customer and bookings details -->
             <!-- table of rooms -->
             <!-- footer wrap -->
             <div class="footer-wrap pd-20 mb-20 mt-3 card-box">
                 This theme design by
-                <a href="https://github.com/dropways" target="_blank">ABC</a>
+                <a href="#" target="_blank">ABC</a>
             </div>
             <!-- footer wrap -->
         </div>
@@ -606,49 +641,104 @@
     </div>
     <!-- /main container -->
 </body>
-<!-- Include jQuery and Bootstrap JS (if not already included) by ritika-->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--  add form details -->
+<!-- ajax for add room details -->
 <script>
     $(document).ready(function () {
-        $('#saveformdetails').on('submit', function (e) {
-            e.preventDefault(); // Prevent the default form submission
+        $('#saveformdetails').click(function (e) {
+            e.preventDefault(); // Prevent the form from submitting normally
 
-            // Gather form data
-            var formData = {
+            // Collect form data
+            const formData = {
                 floor: $('#floor').val(),
                 room_no: $('#room_no').val(),
                 room_type: $('#room_type').val(),
+                members: $('#members').val(),
                 status: $('#status').val(),
-                price: $('#price').val(),
+                price: $('#price').val()
             };
 
+            // AJAX request
             $.ajax({
-                url: 'room/insert_data', // Adjust the URL accordingly
+                url: '<?= base_url('room/addRoom'); ?>', // Adjust the URL according to your routing
                 type: 'POST',
                 data: formData,
-                dataType: 'json',
                 success: function (response) {
-                    if (response.success) {
-                        // Hide the modal (if applicable)
-                        $('#AddRoom-modal').modal('hide');
+                    // Show the appropriate message in the feedback modal
+                    $('#feedbackMessage').text(response.message); // Set the success or error message
+                    $('#feedbackModal').modal('show'); // Show feedback modal
 
-                        // Show success message after modal is hidden
-                        $('#AddRoom-modal').on('hidden.bs.modal', function () {
-                            alert('Room details added successfully!');
-                            // Optionally, you can add more sophisticated message display logic here
-                        });
-                    } else {
-                        alert('Error: ' + response.message);
+                    // Hide the "Add Room" modal after the message is shown
+                    $('#AddRoom-modal').modal('hide'); // Hide the "Add Room" modal in both success and error cases
+
+                    // Optionally, reset the form or refresh the room list here (e.g., form reset)
+                    if (response.status === 'success') {
+                        $('#addRoomForm')[0].reset(); // Reset the form after successful submission
                     }
                 },
-                error: function (xhr, status, error) {
-                    alert('An error occurred: ' + error);
+                error: function () {
+                    // Default error message in case of a request failure
+                    $('#feedbackMessage').text('An error occurred while adding the room.'); // Set generic error message
+                    $('#feedbackModal').modal('show'); // Show feedback modal
+
+                    // Hide the "Add Room" modal in case of error (same as in the success case)
+                    $('#AddRoom-modal').modal('hide');
                 }
             });
         });
     });
 </script>
+<!-- delete room details  -->
+<script>
+    var roomId;
 
+    // Show confirmation modal on delete button click
+    $(document).on('click', '.delete-room', function (e) {
+        e.preventDefault();
+        roomId = $(this).attr('href').split('/').pop();  // Extract room ID from the URL
+        $('#confirmDelete-Modal').modal('show');  // Show the confirmation modal
+    });
 
+    // Handle confirmation button click
+    $(document).on('click', '#confirm_Delete', function () {
+        $.ajax({
+            url: '<?= base_url('room/deleteRoom'); ?>/' + roomId,  // Corrected URL for the DELETE request
+            type: 'DELETE',
+            dataType: 'json',
+            success: function (response) {
+                $('#confirmDelete-Modal').modal('hide');  // Close the confirmation modal
+                showMessageModal(response);  // Show the success/error message in the modal
+            },
+            error: function () {
+                $('#confirmDelete-Modal').modal('hide');  // Close the confirmation modal
+                showMessageModal({ success: false, message: 'An error occurred while trying to delete the room.' });  // Show error message
+            }
+        });
+    });
 
+    // Function to display the success/error message in a modal
+    function showMessageModal(response) {
+        var messageClass = response.success ? 'bg-success' : 'bg-danger';
+        var messageTitle = response.success ? 'Room Deleted' : 'Error Deleting Room';
+
+        // Set the modal content
+        $('#messageModalLabel').text(messageTitle);  // Set modal title
+        $('#modalMessage').text(response.message);  // Set modal body message
+        $('#modalHeader').removeClass('bg-success bg-danger').addClass(messageClass);  // Set background color based on success/error
+
+        // Show the message modal
+        $('#messageModal').modal('show');
+
+        // If the operation was successful, reload the page after 3 seconds
+        if (response.success) {
+            setTimeout(function () {
+                location.reload();
+            }, 3000);
+        }
+    }
+</script>
+<script>
+    var roomId;
+
+</script>
 <?php include('template/dashboard-footer.php'); ?>

@@ -476,14 +476,12 @@
                 </div>
             </div>
             <!-- /content row 2 -->
-
-
             <!-- use as per requirement -->
             <!-- use as per requirement -->
             <!-- footer wrap -->
             <div class="footer-wrap pd-20 mb-20 card-box flex-wrap">
-                This theme design by
-                <a href="#" target="_blank">ABC</a>
+                All rights reserved
+                <a href="#" target="_blank"> © 2024.</a>
             </div>
             <!-- footer wrap -->
 

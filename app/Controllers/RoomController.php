@@ -41,6 +41,7 @@ class RoomController extends Controller
             return $this->response->setJSON(['success' => false, 'message' => 'Failed to save room details']); // if condition is false
         }
         // $roomModel->insert($data);
+
         // return $this->response->setJSON(['success' => true]);
     }
     // Function to edit room
@@ -57,13 +58,21 @@ class RoomController extends Controller
         $roomModel->update($id, $data);
         return redirect()->to('/roomcontroller');
     }
-
     // Function to delete room
-    public function deleteRoom($id)
+    public function delete($id)
     {
-        $roomModel = new RoomModel();
-        $data['rooms'] = $roomModel->find($id);
-        return view('admin_layouts/room-management', $data);
+        $model = new RoomModel();
+
+        // Check if the record exists
+        $record = $model->find($id);
+        if (!$record) {
+            return redirect()->to('/RoomController')->with('error', 'Record not found');
+        }
+        // Delete the record
+        $model->delete($id);
+
+        // Redirect or respond
+        return redirect()->to('/RoomController')->with('success', 'Record deleted successfully');
     }
 
 

@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 use App\Models\AdminModel;
-use App\Models\StaffModel;
 
 class Admin extends BaseController
 {

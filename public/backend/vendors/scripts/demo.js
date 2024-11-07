@@ -50,9 +50,9 @@ function togglePassword(passwordFieldId, toggleIconId) {
 /*------------------script by Sameer------------------------ */
 // Object to hold room numbers for each floor
 const roomsByFloor = {
-  ground: ["101", "102", "103", "104"],
-  first: ["201", "202", "203", "204"],
-  second: ["301", "302", "303", "304"],
+  ground: ["001", "002", "003", "004"],
+  first: ["101", "102", "103", "104"],
+  second: ["201", "202", "203", "204"],
 };
 
 // Function to populate room numbers based on selected floor
@@ -113,6 +113,8 @@ $(document).ready(function () {
   `).fadeIn().delay(3000).fadeOut();
   }
 });
+
+
 
 
 

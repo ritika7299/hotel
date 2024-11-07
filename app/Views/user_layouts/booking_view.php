@@ -316,104 +316,133 @@
                         </nav>
                     </div>
                 </div>
-                <!-- form area -->
-                <div class="pd-20 card-box mb-30">
-                    <div class="content clearfix">
-                        <div class="row">
-                            <!-- check availability details -->
-                            <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                                <div class="pd-30 height-100-p">
-                                    <h4 class="mb-30 h4">Guest Informations</h4>
-                                    <div id="guest-information" class="guest-information" data-highcharts-chart="1">
-                                        <!-- guest details form -->
-                                        <form action="" method="POST">
+                <!-- The form for booking -->
+                <form id="bookingForm">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="content clearfix">
+                            <div class="row">
+                                <!-- Guest Information -->
+                                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
+                                    <div class="pd-30 height-100-p">
+                                        <h4 class="mb-30 h4">Guest Information</h4>
+                                        <div id="guest-information">
+                                            <!-- guest details form -->
                                             <div class="form-group">
-                                                <input class="form-control" type="text" placeholder="Enter Full Name" />
+                                                <input class="form-control" type="text" id="guest_fullname"
+                                                    name="guest_fullname" placeholder="Enter Full Name" />
                                             </div>
                                             <div class="form-group">
-                                                <input class="form-control" value="" type="email"
-                                                    placeholder="Enter Email" />
+                                                <input class="form-control" id="guest_email" name="guest_email"
+                                                    type="email" placeholder="Enter Email" />
                                             </div>
                                             <div class="form-group">
-                                                <input class="form-control" value="" type="tel"
-                                                    placeholder="Enter Mobile" maxlength="10" />
+                                                <input class="form-control" id="guest_mobile" name="guest_mobile"
+                                                    type="tel" placeholder="Enter Mobile" maxlength="10" />
                                             </div>
                                             <div class="form-group">
-                                                <input class="form-control" value="" type="text"
-                                                    placeholder="Enter Address" />
+                                                <input class="form-control" id="guest_address" name="guest_address"
+                                                    type="text" placeholder="Enter Address" />
                                             </div>
                                             <div class="form-group">
-                                                <select class="form-control">
-                                                    <option placeholder="">Select ID</option>
-                                                    <option id="vo">Voter ID</option>
-                                                    <option id="ac">Aadhaar Card</option>
-                                                    <option id="pc">Pan Card</option>
-                                                    <option id="pp">Passport</option>
+                                                <select class="form-control" id="guest_id_type" name="guest_id_type">
+                                                    <option value="">Select ID</option>
+                                                    <option value="Voter ID">Voter ID</option>
+                                                    <option value="Aadhaar Card">Aadhaar Card</option>
+                                                    <option value="Pan Card">Pan Card</option>
+                                                    <option value="Passport">Passport</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <input class="form-control" value="" type="text"
-                                                    placeholder="Enter ID No." />
+                                                <input class="form-control" id="guest_idno" name="guest_idno"
+                                                    type="text" placeholder="Enter ID No." maxlength="16" />
                                             </div>
-                                        </form>
-                                        <!-- /guest details form -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /check availability details -->
-                            <!-- details table -->
-                            <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
-                                <div class="pd-30 height-100-p">
-                                    <h4 class="mb-30 h4">Room Informations</h4>
-                                    <div id="guest-reservation" class="guest-reservation" data-highcharts-chart="1">
-                                        <!-- guest details form -->
-                                        <form action="" method="POST">
+                                <!-- Room Information -->
+                                <div class="col-lg-6 col-md-12 col-sm-12 mb-30">
+                                    <div class="pd-30 height-100-p">
+                                        <h4 class="mb-30 h4">Room Information</h4>
+                                        <div id="guest-reservation">
                                             <div class="form-group">
-                                                <select class="form-control" id="floor" required>
-                                                    <option value="">Select floor</option>
+                                                <div class="row d-flex">
+                                                    <div class="col-md-6">
+                                                        <label for="check_in">Check-in</label>
+                                                        <input class="form-control" id="check_in" name="check_in"
+                                                            type="date" />
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="check_out">Check-Out</label>
+                                                        <input class="form-control" id="check_out" name="check_out"
+                                                            type="date" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control" id="floor" name="floor">
+                                                    <option value="">Select Floor</option>
                                                     <option value="ground">Ground</option>
                                                     <option value="first">First</option>
                                                     <option value="second">Second</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <select class="form-control" id="room_no" required>
-                                                    <option value="">Select Room no.</option>
-                                                    <!-- Room options will be populated dynamically -->
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <select class="form-control" id="room_type" required>
-                                                    <option value="">Select Room type</option>
+                                                <select class="form-control" id="room_type" name="room_type">
+                                                    <option value="">Select Room Type</option>
                                                     <option value="Single">Single</option>
                                                     <option value="Double">Double</option>
                                                     <option value="Deluxe">Deluxe</option>
                                                 </select>
                                             </div>
-                                        </form>
-                                        <!-- /guest details form -->
+                                            <div class="form-group">
+                                                <select class="form-control" id="total_members" name="total_members">
+                                                    <option value="">Select Members</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- /details table -->
-                        </div>
-                        <div class="form-group">
-                            <div class="pull-right">
-                                <a href="#submit-user-details" class="btn btn-primary btn-sm scroll-click"
-                                    rel="content-y" data-toggle="modal" data-target="#payment-success-modal"
-                                    role="button">Payment
-                                    <i class="icon-copy fa fa-paper-plane"></i></a>
+                            <!-- Submit Button -->
+                            <div class="form-group">
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-primary btn-sm" id="submit_form_details">Book
+                                        Now!</button>
+                                </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
-                <!-- /form area -->
+                </form>
             </div>
         </div>
         <!-- /inner content -->
-        <!-- successfull modal -->
-        <div class="modal fade" id="payment-success-modal" tabindex="-1" role="dialog"
+        <!-- booking successfull modal -->
+        <div class="modal fade" id="booking-success-modal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center font-18">
+                        <h3 class="mb-20">Booking Successfully!</h3>
+                        <div class="mb-30 text-center">
+                            <img src="<?php echo site_url(); ?>public/backend/vendors/images/success.png" />
+                        </div>
+                        <div id="modal_content"></div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="submit" class="btn btn-primary" data-dismiss="modal">
+                            Done
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /booking successfull modal -->
+        <!-- payment successfull modal -->
+        <!-- <div class="modal fade" id="payment-success-modal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -431,8 +460,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- /successfull modal -->
+        </div> -->
+        <!-- /payment successfull modal -->
     </div>
     <!-- /main container -->
     <!-- footer -->
@@ -442,4 +471,37 @@
     </div>
     <!-- /footer -->
 </body>
+<script>
+    $(document).ready(function () {
+        $('#bookingForm').on('submit', function (e) {
+            e.preventDefault();  // Prevent form submission
+
+            // Serialize form data
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: '<?= base_url('booking/createBooking') ?>',  // Controller method to handle form submission
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status === 'success') {
+                        // Show success message in modal
+                        $('#modalMessage').html('<p>' + response.message + '</p>');
+                        $('#messageModal').modal('show');
+                    } else if (response.status === 'error') {
+                        // Show error message in modal
+                        $('#modalMessage').html('<p>' + response.message + '</p>');
+                        $('#messageModal').modal('show');
+                    }
+                },
+                error: function () {
+                    $('#modalMessage').html('<p>An error occurred while submitting the form. Please try again.</p>');
+                    $('#messageModal').modal('show');
+                }
+            });
+        });
+    });
+</script>
+
 <?php include('template/footer.php'); ?>

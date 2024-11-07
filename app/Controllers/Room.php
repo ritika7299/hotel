@@ -10,88 +10,131 @@ class Room extends BaseController
     public function index()
     {
         $model = new RoomModel();
-        $data['rooms'] = $model->findAll(); // Fetch all staff records
+        $data['rooms'] = $model->orderBy('created_at', 'DESC')->findAll(); // Fetch all rooms records
         return view('admin_layouts/rooms_view', $data); // Pass data to the view
-        // return view('admin_layouts/staff_view');
     }
     // add details function 
-    public function add_form_details()
+    /*public function addRoom()
     {
-        $validation = \Config\Services::validation();
-        helper(['form', 'url']);
-        $response = ['success' => false, 'message' => ''];
-        // Validate the input
-        if (
-            !$this->validate([
-                'floor' => 'required',
-                'room_no' => 'required',
-                'room_type' => 'required',
-                'status' => 'required',
-                'price' => 'required|decimal',
-            ])
-        ) {
-            $response['message'] = implode(', ', $this->validator->getErrors());
-            return $this->response->setJSON($response);
-        }
-        // Process and save the data
+        // automatically session start
+        session()->start();
+
         $model = new RoomModel();
+        $existingRoom = RoomModel->checkRoomExists($floor, $room_no);
+
+        if ($existingRoom) {
+            // If room already exists, return error
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'This room already exists in the database.'
+            ]);
+            return;
+        }
+        // Get data from the AJAX request
         $data = [
             'floor' => $this->request->getPost('floor'),
             'room_no' => $this->request->getPost('room_no'),
             'room_type' => $this->request->getPost('room_type'),
+            'members' => $this->request->getPost('members'),
             'status' => $this->request->getPost('status'),
             'price' => $this->request->getPost('price'),
         ];
-        if ($model->save($data)) {
-            $response['success'] = true;
-            $response['message'] = 'Staff details added successfully!';
-        } else {
-            $response['message'] = 'Failed to add staff details.';
-        }
-        return $this->response->setJSON($response);
-    }
-    // insert data to the database 
-    public function insert_data()
-    {
-        $session = session();
-
-        // Basic session validation
-        if (!$session->get('logged_in')) {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Unauthorized access']);
-        }
-
-        $model = new RoomModel();
-
-        $data = [
-            'floor' => $this->request->getPost('floor'),
-            'room_no' => $this->request->getPost('room_no'),
-            'room_type' => $this->request->getPost('room_type'),
-            'status' => $this->request->getPost('status'),
-            'price' => $this->request->getPost('price'),
-        ];
-
-        // Validate data here
+        // Insert data into the database
         if ($model->insert($data)) {
-            return $this->response->setJSON(['status' => 'success']);
+            // Set a flashdata message
+            session()->setFlashdata('success', 'Room added successfully!');
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Room added successfully'
+            ]);
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Failed to insert data']);
+            session()->setFlashdata('error', 'Failed to add room details.');
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to add room details.'
+            ]);
+        }
+    }*/
+    public function addRoom()
+    {
+        // Automatically start session (if not already started)
+        session()->start();
+
+        // Initialize RoomModel
+        $model = new RoomModel();
+
+        // Get floor and room_no from POST data
+        $floor = $this->request->getPost('floor');
+        $room_no = $this->request->getPost('room_no');
+
+        // Check if the room already exists in the database
+        $existingRoom = $model->checkRoomExists($floor, $room_no);  // Fix here: Use $model instance
+
+        if ($existingRoom) {
+            // If the room already exists, return an error message
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'This room already exists in the database, try another one.'
+            ]);
+        }
+
+        // Get all other data from the POST request
+        $data = [
+            'floor' => $floor,
+            'room_no' => $room_no,
+            'room_type' => $this->request->getPost('room_type'),
+            'members' => $this->request->getPost('members'),
+            'status' => $this->request->getPost('status'),
+            'price' => $this->request->getPost('price'),
+        ];
+
+        // Insert the room into the database
+        if ($model->insert($data)) {
+            // Set flashdata for success
+            session()->setFlashdata('success', 'Room added successfully!');
+
+            // Return success response in JSON format
+            return $this->response->setJSON([
+                'status' => 'success',
+                'message' => 'Room added successfully.'
+            ]);
+        } else {
+            // Set flashdata for error
+            session()->setFlashdata('error', 'Failed to add room details.');
+
+            // Return error response in JSON format
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Failed to add room details.'
+            ]);
         }
     }
-
-    // delete room details
-    public function delete($id)
+    public function deleteRoom($roomId)
     {
         $model = new RoomModel();
 
-        if ($model->find($id)) {
-            $model->delete($id);
-            return $this->response->setJSON(['success' => true]);
-        } else {
-            return $this->response->setJSON(['success' => false, 'message' => 'Item not found.']);
+        try {
+            // Delete the room by ID
+            $deleted = $model->delete($roomId);
+
+            if ($deleted) {
+                return $this->response->setJSON([
+                    'success' => true,
+                    'message' => 'The room has been successfully deleted.'
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Failed to delete the room. Please try again.'
+                ]);
+            }
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'An error occurred while deleting the room.'
+            ]);
         }
     }
-
-
 
 }
 

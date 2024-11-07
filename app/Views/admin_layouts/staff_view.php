@@ -171,7 +171,6 @@
                             class="fa fa-angle-double-right"></i></label>
                 </div>
             </div>
-
             <h4 class="weight-600 font-18 pb-10">Menu List Icon</h4>
             <div class="sidebar-radio-group pb-30 mb-10">
                 <div class="custom-control custom-radio custom-control-inline">
@@ -310,7 +309,7 @@
     <!-- inner content -->
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px">
-            <div class="row">
+            <div class="row mt-0">
                 <div class="col-md-6 col-sm-12">
                     <div class="title">
                         <h4>Dashboard</h4>
@@ -326,20 +325,11 @@
                         </ol>
                     </nav>
                 </div>
+                <!-- add success and message  -->
                 <div class="col-md-6 col-sm-12">
-                    <span class="pull-right">
-                        <?php if (session()->getFlashdata('success')): ?>
-                            <div class="alert alert-success">
-                                <?= session()->getFlashdata('success') ?>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (session()->getFlashdata('error')): ?>
-                            <div class="alert alert-danger">
-                                <?= session()->getFlashdata('error') ?>
-                            </div>
-                        <?php endif; ?>
-                    </span>
                     <span class="pull-right" id="responseMessage">
+                    </span>
+                    <span class="pull-right" id="deleteMessage">
                     </span>
                 </div>
             </div>
@@ -358,7 +348,7 @@
                             <th colspan="7" class="text-primary">Staff List</th>
                         </tr>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">S.No.</th>
                             <th scope="col">Full Name</th>
                             <th scope="col">Employee Id</th>
                             <th scope="col">Email Id</th>
@@ -370,9 +360,10 @@
                     <!-- tbody start -->
                     <tbody id="staffTableBody">
                         <?php if (!empty($staff)): ?>
+                            <?php $counter = 1; // Initialize a counter ?>
                             <?php foreach ($staff as $row): ?>
 
-                                <td><?= esc($row['id']); // Display the counter and increment it ?></td>
+                                <td><?= esc($counter++); // Display the counter and increment it ?></td>
                                 <!-- Row number -->
                                 <td><?= esc($row['fullname']); ?></td>
                                 <td><?= esc($row['empid']); ?></td>
@@ -381,9 +372,11 @@
                                 <td><?= esc($row['post']); ?></td>
                                 <td>
                                     <div class="table-actions">
-                                        <!-- Edit  -->
-                                        <a href="<?= base_url('staff/update' . $row['id']); ?>" data-toggle="modal"
-                                            data-target="#updateStaff-modal" class="edit-staff"
+                                        <!-- update  -->
+                                        <a href="<?= base_url('staff/update_staff'); ?>" data-id="<?= $row['id']; ?>"
+                                            data-fullname="<?= $row['fullname']; ?>" data-email="<?= $row['email']; ?>"
+                                            data-mobile="<?= $row['mobile']; ?>" data-post="<?= $row['post']; ?>"
+                                            data-toggle="modal" data-target="#updateStaff-modal" class="update-staff"
                                             style="color: rgb(38, 94, 215);">
                                             <i class="icon-copy dw dw-edit2"></i>
                                         </a>
@@ -404,12 +397,27 @@
                     </tbody>
                     <!-- /tbody end -->
                 </table>
+                <!-- pagination area -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- pagination area -->
             </div>
-            <!-- Datatable End -->
-            <!-- Add-staff modal -->
+            <!-- /Datatable End -->
+            <!-- add staff details modal -->
             <div class="modal fade" id="AddStaff-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                 style="display: none;">
-                <div class="modal-dialog modal-dialog-centered modal-medium">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
                             <h4 class="modal-title text-white" id="myLargeModalLabel">Add New
@@ -419,7 +427,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="AddStaffDetailsform"> <!-- modal form id  -->
+                            <form id="AddStaffDetailsform" class="needs-validation" novalidate> <!-- modal form id  -->
                                 <div class="content clearfix">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -429,13 +437,13 @@
                                                 <div class="text-danger" id="fullnameError"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <input class="form-control" type="text" id="empid" maxlength="8"
                                                     placeholder="Enter Staff id" value="" name="empid" required>
                                                 <div class="text-danger" id="empidError"></div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <input class="form-control" type="text" id="email" placeholder="Email"
@@ -479,11 +487,11 @@
                     </div>
                 </div>
             </div>
-            <!-- /Add-staff modal -->
-            <!-- update-staff modal -->
+            <!-- /add staff details modal -->
+            <!-- update staff details modal -->
             <div class="modal fade" id="updateStaff-modal" tabindex="-1" role="dialog"
                 aria-labelledby="myLargeModalLabel" style="display: none;">
-                <div class="modal-dialog modal-dialog-centered modal-medium">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-primary">
                             <h4 class="modal-title text-white" id="myLargeModalLabel">Update Details
@@ -496,6 +504,7 @@
                             <!-- staff details update form -->
                             <form id="updateStaffDetailsform">
                                 <div class="content clearfix">
+                                    <!-- form input row -->
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -503,12 +512,12 @@
                                                     placeholder="Full Name" value="" name="fullname" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
+                                        <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <input class="form-control" type="text" id="empid" maxlength="8"
                                                     placeholder="Enter Staff id" value="" name="empid" required>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <input class="form-control" type="text" id="email" placeholder="Email"
@@ -540,39 +549,48 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" id="updateDetails" onclick="" class="btn btn-primary">
+                            <button type="submit" id="updateStaffDetails" class="btn btn-primary">
                                 Save
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /update-staff modal -->
-            <!-- confirm delete details modal -->
-            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
+            <!-- /update staff details modal -->
+            <!-- confirmation delete details modal -->
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
+                aria-labelledby="confirmDeleteModalLabel" style="display: none;">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="confirmDeleteModalLabel"> Are you sure you want to delete
-                                this record?</h5>
+                        <div class="modal-body">
+                            Are you sure you want to delete this staff member?
                         </div>
-                        <!-- <div class="modal-body">
-                                Are you sure you want to delete this record?
-                            </div> -->
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-danger" href="" id="confirmDelete">Yes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-danger" id="confirmDelete">Yes</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /confirm delete details modal -->
+            <!-- after deletion Message modal  -->
+            <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="messageModalLabel"
+                style="display: none;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body" id="messageContent">
+                            <!-- Message will be displayed here -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- footer wrap -->
         <div class="footer-wrap pd-20 mb-20 mt-3 card-box">
             This theme design by
-            <a href="https://github.com/dropways" target="_blank">ABC</a>
+            <a href="#" target="_blank">ABC</a>
         </div>
         <!-- footer wrap -->
     </div>
@@ -582,39 +600,30 @@
 </body>
 <!-- Include jQuery and Bootstrap JS (if not already included) by ritika-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- add details script -->
+<!-- add staff details script by ritika -->
 <script>
     $(document).ready(function () {
         $('#saveformdetails').on('click', function (e) {
             e.preventDefault(); // Prevent the default form submission
             $.ajax({
                 type: 'POST',
-                url: '<?= base_url('staff/add_form_details') ?>', // Adjust to your controller method
+                url: '<?= base_url('staff/add_form_details') ?>',
                 data: $('#AddStaffDetailsform').serialize(),
                 dataType: 'json',
                 success: function (response) {
-                    if (response.success) {
-                        $('#responseMessage').html('<div class="alert alert-success"><i class="fa fa-check"></i>' + response.message + '</div>');
-                        $('#AddStaffDetailsform')[0].reset(); // Reset the form
-                        $('#AddStaff-modal').modal('hide'); // Hide the modal
-                        // Hide success message after 3 seconds
-                        setTimeout(function () {
-                            $('#responseMessage').fadeOut('slow', function () {
-                                $(this).html('').show(); // Clear the message and show it again for next use
-                            });
-                        }, 3000); // 3000 milliseconds = 3 seconds
-                    } else {
-                        $('#responseMessage').html('<div class="alert alert-danger"><i class="fa fa-cancel"></i>' + response.message + '</div>');
-                        // Close modal if there are validation errors
-                        $('#AddStaff-modal').modal('hide');
+                    const alertType = response.success ? 'success' : 'danger';
+                    const messageIcon = response.success ? 'fa-check' : 'fa-cancel';
+                    const message = response.success ? response.message : response.message;
 
-                        // Hide error message after 3 seconds
-                        setTimeout(function () {
-                            $('#responseMessage').fadeOut('slow', function () {
-                                $(this).html('').show(); // Clear the message and show it again for next use
-                            });
-                        }, 3000); // 3000 milliseconds = 3 seconds
-                    }
+                    $('#responseMessage').html(`<div class="alert alert-${alertType}"><i class="fa ${messageIcon}"></i>${message}</div>`);
+                    $('#AddStaffDetailsform')[0].reset(); // Reset the form
+                    $('#AddStaff-modal').modal('hide'); // Hide the modal
+
+                    setTimeout(function () {
+                        $('#responseMessage').fadeOut('slow', function () {
+                            $(this).empty().show(); // Clear the message and show it again
+                        });
+                    }, 3000);
                 },
                 error: function (xhr) {
                     $('#responseMessage').html('<div class="alert alert-danger">An error occurred: ' + xhr.responseText + '</div>');
@@ -623,86 +632,72 @@
         });
     });
 </script>
-<!-- update details script -->
+<!-- update staff details script by ritika-->
 <script>
-    $(document).ready(function () {
-        $('#updateDetails').click(function () {
-            var formData = $('#updateStaffDetailsform').serialize();
-            $.ajax({
-                type: "POST",
-                url: "staff/update", // Adjust this URL based on your routing
-                data: formData,
-                success: function (response) {
-                    // Handle success (e.g., show a success message, close the modal)
-                    alert('Details updated successfully!');
-                    $('#updateStaff-modal').modal('hide'); //modal
-                    // Optionally, refresh your staff list or update the UI
-                },
-                error: function (xhr, status, error) {
-                    // Handle error (e.g., show error messages)
-                    var errors = xhr.responseJSON.errors;
-                    if (errors) {
-                        $.each(errors, function (key, value) {
-                            $('#' + key + 'Error').text(value);
-                        });
-                    } else {
-                        alert('An error occurred. Please try again.');
-                    }
-                }
-            });
-        });
+    $(document).on('click', '.update-staff', function () {
+        const staffId = $(this).data('id');
+        const fullname = $(this).data('fullname');
+        const email = $(this).data('email');
+        const mobile = $(this).data('mobile');
+        const post = $(this).data('post');
+        $('#id').val(staffId);
+        $('#fullname').val(fullname);
+        $('#email').val(email);
+        $('#mobile').val(mobile);
+        $('#post').val(post);
     });
-</script>
-<!-- delete details script -->
-<!-- Example HTML button for deleting a staff member -->
-<!-- <button class="delete-button" data-id="1">Delete Staff</button> -->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    $('#updateStaffDetails').on('click', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: '<?= base_url('staff/update_staff'); ?>',
+            data: $('#updateStaffDetailsform').serialize(),
+            success: function (response) {
+                if (response.success) {
+                    $('#updateStaff-modal').modal('hide');
+                    location.reload(); // Refresh to see updated details
+                } else {
+                    alert('Error: ' + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                alert('An error occurred: ' + error);
+            }
+        });
+    });</script>
 <script>
-    $(document).ready(function () {
-        $('.delete-staff').click(function () {
-            const staffId = $(this).data('id'); // Get the staff ID from the button
+    var staffId;
+    // Show confirmation modal on delete button click
+    $(document).on('click', '.delete-staff', function (e) {
+        e.preventDefault();
+        staffId = $(this).attr('href').split('/').pop();
+        $('#confirmDeleteModal').modal('show');
+    });
 
-            // Confirm deletion
-            if (confirm('Are you sure you want to delete this staff member?')) {
-                $.ajax({
-                    url: '/path/to/your/staff/delete_details/($id)', // Update with your route
-                    type: 'POST',
-                    data: { id: staffId },
-                    success: function (response) {
-                        if (response.success) {
-                            alert(response.message);
-                            // Optionally, remove the item from the UI
-                            // $(this).closest('.staff-item').remove();
-                        } else {
-                            alert(response.message);
-                        }
-                    },
-                    error: function () {
-                        alert('An error occurred while trying to delete the staff member.');
-                    }
-                });
+    // Handle confirmation button click
+    $(document).on('click', '#confirmDelete', function () {
+        $.ajax({
+            url: '<?= base_url('staff/delete_staff/'); ?>' + staffId,
+            type: 'DELETE',
+            dataType: 'json',
+            success: function (response) {
+                $('#confirmDeleteModal').modal('hide');
+                var messageClass = response.success ? 'alert-success' : 'alert-danger';
+                $('#deleteMessage').text(response.message).removeClass('alert-success alert-danger').addClass(messageClass).show();
+
+                if (response.success) {
+                    setTimeout(location.reload.bind(location), 3000);
+                }
+            },
+            error: function () {
+                $('#confirmDeleteModal').modal('hide');
+                $('#deleteMessage').text('An error occurred while trying to delete the staff member.').removeClass('alert-success').addClass('alert-danger').show();
             }
         });
     });
+
 </script>
 
-<!-- session messages hide  -->
-<!-- <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Select all alert divs
-        const alerts = document.querySelectorAll('.alert');
-
-        // Loop through each alert and set a timeout to hide it
-        alerts.forEach(alert => {
-            setTimeout(() => {
-                alert.style.transition = 'opacity 0.5s ease';
-                alert.style.opacity = '0';
-                setTimeout(() => {
-                    alert.remove(); // Remove from DOM after fade-out
-                }, 500); // Match this duration with the CSS transition time
-            }, 3000); // Show the alert for 3000 milliseconds (3 seconds)
-        });
-    });
-</script> -->
 <?php include('template/dashboard-footer.php'); ?>
